@@ -2,6 +2,7 @@ from turtle import Turtle, Screen
 
 mike = Turtle()
 screen = Screen()
+mike.color("green")
 
 def move_forward():
     mike.forward(10)
