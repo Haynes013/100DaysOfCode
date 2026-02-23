@@ -16,10 +16,10 @@ ball = Ball()
 scoreboard = ScoreBoard()
 
 screen.listen()
-screen.onkey(r_paddle.paddle_up, "Up")
-screen.onkey(r_paddle.paddle_down, "Down")
-screen.onkey(l_paddle.paddle_up, "w")
-screen.onkey(l_paddle.paddle_down, "s")
+screen.onkeypress(r_paddle.paddle_up, "Up")
+screen.onkeypress(r_paddle.paddle_down, "Down")
+screen.onkeypress(l_paddle.paddle_up, "w")
+screen.onkeypress(l_paddle.paddle_down, "s")
 
 game_on = True
 while game_on: # needs the loop to update, after every move
@@ -38,11 +38,17 @@ while game_on: # needs the loop to update, after every move
     if ball.xcor() > 380:
         scoreboard.l_point()
         ball.reset_position()
+        if scoreboard.l_score >= 5:
+            game_on = False
+            scoreboard.game_over("Left Player Wins!")
 
     #Detect left paddle miss
     if ball.xcor() < -380:
         scoreboard.r_point()
         ball.reset_position()
+        if scoreboard.r_score >= 5:
+            game_on = False
+            scoreboard.game_over("Right Player Wins!")
 
 
 screen.exitonclick()
